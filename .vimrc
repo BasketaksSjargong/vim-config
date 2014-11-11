@@ -10,19 +10,21 @@ set rtp+=~/.vim/bundle/vundle
 call vundle#begin()
 
 if exists(':Plugin')
-	" Let vundle manage itself
-	Plugin 'gmarik/Vundle.vim'
-	" Easy commenting in vim
-	Plugin 'tpope/vim-commentary'
-	" Vim defaults anyone can agree on
-	Plugin 'tpope/vim-sensible'
-	" VimAirline - lightweight Powerline
-	Plugin 'bling/vim-airline'
-	" VimTabular - autoaligning blocs of text by delimiter
-	Plugin 'godlygeek/tabular'
+  " Let vundle manage itself
+  Plugin 'gmarik/Vundle.vim'
+  " Easy commenting in vim
+  Plugin 'tpope/vim-commentary'
+  " Vim defaults anyone can agree on
+  Plugin 'tpope/vim-sensible'
+  " Easy git integration is vim
+  Plugin 'tpope/vim-fugitive'
+  " VimAirline - lightweight Powerline
+  Plugin 'bling/vim-airline'
+  " VimTabular - autoaligning blocs of text by delimiter
+  Plugin 'godlygeek/tabular'
 
-	call vundle#end()
-	filetype plugin indent on
+  call vundle#end()
+  filetype plugin indent on
 endif
 """""""""""""""""""""""""""""""""""""""""""""""""
 " END VUNDLE CONFIG
@@ -33,14 +35,14 @@ endif
 """""""""""""""""""""""""""""""""""""""""""""""""
 
 if has('autocmd')
-	filetype plugin indent on
+  filetype plugin indent on
 endif
 if has('syntax') && !exists('g:syntax_on')
-	syntax enable
+  syntax enable
 endif
 
 if has('multi_byte')
-  if &termencoding == " "
+  if &termencoding == ' '
     let &termencoding = &encoding
   endif
   set encoding=utf-8
@@ -58,8 +60,9 @@ set incsearch         " incremental searching
 set ignorecase        " searches are case insensitive
 set smartcase         " ... unless they contain at least one capital letter
 
-set showcmd           " show partial command in bottom-right
-set wildmenu          " use tab completion on command line
+set showcmd             " show partial command in bottom-right
+set wildmenu            " use tab completion on command line
+set wildignore+=*/tmp/* " excludes temp folder from wildmenu
 
 " Controls the number of lines/chars to keep visible before scrolling
 set scrolloff=1
@@ -94,14 +97,46 @@ end
 set number
 
 
-set nowrap "don't wrap lines (map leader-W to toggle)
-set linebreak " when wrapping, wrap at word boundaries
+set nowrap                " don't wrap lines (map leader-W to toggle)
+set linebreak             " when wrapping, wrap at word boundaries
 if exists('+breakindent')
-  set breakindent " preserves the indent level of wrapped lines
+  set breakindent         " preserves the indent level of wrapped lines
   set showbreak=↳
-  set wrap "wrapping with breakindent is tolerable
+  set wrap                " wrapping with breakindent is tolerable
 endif
+
+" Use par to reflow text / Requires the par-package (AUR on arch)
+if executable('par')
+  set formatprg="par -h -w78 -B=.,\?_A_a "
+endif
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" KEY MAPPINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""
+nmap <space> <leader>
+" Treat wrapped lines as true lines when moving
+nmap <expr> j (v:count == 0 ? 'gj' : 'j')
+nmap <expr> k (v:count == 0 ? 'gk' : 'k')
+" Allow writing via sudo
+cnoremap w!! w !sudo tee > /dev/null %
 " Remapping esc to the key combination jk
-:inoremap jk <Esc> 
-" Enabling syntax highlighting
+inoremap jk <Esc> 
+" Overwriting with defaults
 syntax on
+" Reindent the entire file
+nmap <leader>= gg=G``:echo "reindent global"<CR>
+
+" Fugitive mappings (vim-fugitive)
+nmap <leader>gs :Gstatus<cr>
+nmap <leader>gc :Gcommit<cr>
+nmap <leader>gd :Gdiff<cr>
+nmap <leader>gp :Git push<cr>
+
+" Tabular mappings (vim-tabular)
+nnoremap <Leader>t= :Tabularize assignment<CR>
+vnoremap <Leader>t= :Tabularize assignment<CR>
+nnoremap <Leader>t: :Tabularize symbol<CR>
+vnoremap <Leader>t: :Tabularize symbol<CR>
+nnoremap <Leader>t, :Tabularize comma<CR>
+vnoremap <Leader>t, :Tabularize comma<CR>
+

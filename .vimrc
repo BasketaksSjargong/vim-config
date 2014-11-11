@@ -39,6 +39,13 @@ if has('syntax') && !exists('g:syntax_on')
 	syntax enable
 endif
 
+if has('multi_byte')
+  if &termencoding == " "
+    let &termencoding = &encoding
+  endif
+  set encoding=utf-8
+endif
+
 set autoindent        " preserve indent level on newlines
 set tabstop=2         " a tab is two spaced
 set shiftwidth=2      " << shift is two spaces
@@ -86,10 +93,15 @@ if exists('+relativenumber')
 end
 set number
 
+
+set nowrap "don't wrap lines (map leader-W to toggle)
+set linebreak " when wrapping, wrap at word boundaries
+if exists('+breakindent')
+  set breakindent " preserves the indent level of wrapped lines
+  set showbreak=↳
+  set wrap "wrapping with breakindent is tolerable
+endif
 " Remapping esc to the key combination jk
 :inoremap jk <Esc> 
-
-" Setting colorscheme to molokai
-
 " Enabling syntax highlighting
 syntax on

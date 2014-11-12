@@ -18,6 +18,8 @@ if exists(':Plugin')
   Plugin 'tpope/vim-sensible'
   " Easy git integration is vim
   Plugin 'tpope/vim-fugitive'
+  " Surrounding selections in delimiters.
+  Plugin 'tpope/vim-surround'
   " VimAirline - lightweight Powerline
   Plugin 'bling/vim-airline'
   " VimTabular - autoaligning blocs of text by delimiter
@@ -110,6 +112,8 @@ if executable('par')
   set formatprg="par -h -w78 -B=.,\?_A_a "
 endif
 
+" Airline fonts
+let g:airline_powerline_fonts=1
 """""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -133,10 +137,16 @@ nmap <leader>gd :Gdiff<cr>
 nmap <leader>gp :Git push<cr>
 
 " Tabular mappings (vim-tabular)
-nnoremap <Leader>t= :Tabularize assignment<CR>
-vnoremap <Leader>t= :Tabularize assignment<CR>
-nnoremap <Leader>t: :Tabularize symbol<CR>
-vnoremap <Leader>t: :Tabularize symbol<CR>
-nnoremap <Leader>t, :Tabularize comma<CR>
-vnoremap <Leader>t, :Tabularize comma<CR>
+nnoremap <Leader>t= :Tabularize /=<CR>
+vnoremap <Leader>t= :Tabularize /=<CR>
+nnoremap <Leader>t: :Tabularize /:<CR>
+vnoremap <Leader>t: :Tabularize /:<CR>
+nnoremap <Leader>t, :Tabularize /,<CR>
+vnoremap <Leader>t, :Tabularize /,<CR>
+
+" Moving between windows easily
+nmap <C-j> <C-W>j
+nmap <C-k> <C-W>k
+nmap <C-h> <C-W>h
+nmap <C-l> <C-W>l
 

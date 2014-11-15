@@ -24,7 +24,12 @@ if exists(':Plugin')
   Plugin 'bling/vim-airline'
   " VimTabular - autoaligning blocs of text by delimiter
   Plugin 'godlygeek/tabular'
-
+  " VimLatexSuite(Improved)
+  Plugin 'gerw/vim-latex-suite'
+  " Tagbar - Browsing file structure
+  Plugin 'majutsushi/tagbar'
+  " YouCompleteMe - syntactic auto-completion for all languages.
+  Plugin 'Valloric/YouCompleteMe'
   call vundle#end()
   filetype plugin indent on
 endif
@@ -112,8 +117,6 @@ if executable('par')
   set formatprg="par -h -w78 -B=.,\?_A_a "
 endif
 
-" Airline fonts
-let g:airline_powerline_fonts=1
 """""""""""""""""""""""""""""""""""""""""""""""""
 " KEY MAPPINGS
 """""""""""""""""""""""""""""""""""""""""""""""""
@@ -149,4 +152,20 @@ nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
+
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" PLUGIN SPECIFIC SETTINGS
+"""""""""""""""""""""""""""""""""""""""""""""""""
+" Airline fonts
+let g:airline_powerline_fonts=1
+
+" Latex-suite
+set grepprg=grep\ -nH\ $*
+let g:tex_flavor='latex'
+let g:Tex_DefaultTargetFormat='pdf'
+set iskeyword+=:
+imap <C-space> <Plug>IMAP_JumpForward
+
+" Tagbar
+nmap <leader>tb :TagbarToggle<CR>
 

@@ -22,14 +22,16 @@ if exists(':Plugin')
   Plugin 'tpope/vim-surround'
   " VimAirline - lightweight Powerline
   Plugin 'bling/vim-airline'
-  " VimTabular - autoaligning blocs of text by delimiter
-  Plugin 'godlygeek/tabular'
+  " EasyAlign - Lightweight alternative to VimTabular
+  Plugin 'junegunn/vim-easy-align'
   " VimLatexSuite(Improved)
   Plugin 'gerw/vim-latex-suite'
   " Tagbar - Browsing file structure
   Plugin 'majutsushi/tagbar'
   " YouCompleteMe - syntactic auto-completion for all languages.
   Plugin 'Valloric/YouCompleteMe'
+  " NERDTree - Vim File Browser Plugin
+  Plugin 'scrooloose/nerdtree'
   call vundle#end()
   filetype plugin indent on
 endif
@@ -147,6 +149,13 @@ vnoremap <Leader>t: :Tabularize /:<CR>
 nnoremap <Leader>t, :Tabularize /,<CR>
 vnoremap <Leader>t, :Tabularize /,<CR>
 
+" Latex-Suite
+imap <C-space> <Plug>IMAP_JumpForward
+
+" Tagbar
+nmap <leader>tb :TagbarToggle<CR>
+
+
 " Moving between windows easily
 nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
@@ -156,16 +165,21 @@ nmap <C-l> <C-W>l
 """""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SPECIFIC SETTINGS
 """""""""""""""""""""""""""""""""""""""""""""""""
-" Airline fonts
-let g:airline_powerline_fonts=1
+
+" Airline
+let g:airline_powerline_fonts=1 " Setting powerline fonts
+function! AirlineInit()
+  let g:airline_section_y = airline#section#create(['ffenc', '%{strftime("%H:%M")}'])
+endfunction
+autocmd VimEnter * call AirlineInit()
 
 " Latex-suite
 set grepprg=grep\ -nH\ $*
 let g:tex_flavor='latex'
 let g:Tex_DefaultTargetFormat='pdf'
 set iskeyword+=:
-imap <C-space> <Plug>IMAP_JumpForward
 
-" Tagbar
-nmap <leader>tb :TagbarToggle<CR>
+" NERDTree
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 

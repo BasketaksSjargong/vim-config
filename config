@@ -10,7 +10,7 @@
     cursor_color = "#BBBBBB"
     foreground_color = "#bbbbbb"
     show_titlebar = False
-    font = DejaVu Sans Mono for Powerline Bold 13
+    font = Inconsolata Medium 11
     background_color = "#1c1c1c"
     scrollback_infinite = True
 [layouts]

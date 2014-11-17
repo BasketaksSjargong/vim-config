@@ -141,14 +141,6 @@ nmap <leader>gc :Gcommit<cr>
 nmap <leader>gd :Gdiff<cr>
 nmap <leader>gp :Git push<cr>
 
-" Tabular mappings (vim-tabular)
-nnoremap <Leader>t= :Tabularize /=<CR>
-vnoremap <Leader>t= :Tabularize /=<CR>
-nnoremap <Leader>t: :Tabularize /:<CR>
-vnoremap <Leader>t: :Tabularize /:<CR>
-nnoremap <Leader>t, :Tabularize /,<CR>
-vnoremap <Leader>t, :Tabularize /,<CR>
-
 " Latex-Suite
 imap <C-space> <Plug>IMAP_JumpForward
 

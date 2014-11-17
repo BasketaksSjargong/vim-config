@@ -147,6 +147,9 @@ imap <C-space> <Plug>IMAP_JumpForward
 " Tagbar
 nmap <leader>tb :TagbarToggle<CR>
 
+" EasyAlign
+vmap <Enter> <Plug>(EasyAlign)
+nmap <Leader>a <Plug>(EasyAlign)
 
 " Moving between windows easily
 nmap <C-j> <C-W>j

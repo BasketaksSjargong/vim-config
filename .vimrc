@@ -151,11 +151,15 @@ nmap <leader>tb :TagbarToggle<CR>
 vmap <Enter> <Plug>(EasyAlign)
 nmap <Leader>a <Plug>(EasyAlign)
 
+" NerdTree
+nmap <Leader>nt :NERDTree<CR>
+
 " Moving between windows easily
 nmap <C-j> <C-W>j
 nmap <C-k> <C-W>k
 nmap <C-h> <C-W>h
 nmap <C-l> <C-W>l
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""
 " PLUGIN SPECIFIC SETTINGS
@@ -163,7 +167,7 @@ nmap <C-l> <C-W>l
 
 " Airline
 let g:airline_powerline_fonts=1 " Setting powerline fonts
-function! AirlineInit()
+function! AirlineInit() " Adding current time to airline bar
   let g:airline_section_y = airline#section#create(['ffenc', '%{strftime("%H:%M")}'])
 endfunction
 autocmd VimEnter * call AirlineInit()
@@ -177,4 +181,5 @@ set iskeyword+=:
 " NERDTree
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+
 
